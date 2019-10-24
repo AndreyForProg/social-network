@@ -1,0 +1,13 @@
+.myPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.writePost {
+  width: 99.5%;
+  height: 70px;
+}
+.sendPost {
+  width: 50px;
+}

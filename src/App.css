@@ -1,4 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(4, 63, 63);
+}
 .wrapper {
   width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  margin-top: 50px;
+}
+button {
+  cursor: pointer;
 }
