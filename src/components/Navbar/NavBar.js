@@ -1,8 +1,10 @@
-import React from 'react';
+import React from 'react'
+import s from './navbar.module.css'
+
 
 const NavBar = () => {
   return (
-    <div>
+    <div className={s.navbar}>
       <div>
         first nav
       </div>
@@ -26,4 +28,4 @@ const NavBar = () => {
   );
 }
 
-export default NavBar;
+export default NavBar

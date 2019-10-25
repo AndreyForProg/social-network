@@ -1,0 +1,14 @@
+.user img{
+  max-height: 300px;
+}
+.logo_about {
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.logo_about img{
+  width: 100px;
+  height: 100px;
+  margin: 0 1% 1% 0;
+}
