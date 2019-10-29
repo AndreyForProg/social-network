@@ -4,11 +4,13 @@ import Posts from './Posts/Posts'
 import User from './User/User'
 
 
-const Content = () => {
+
+const Content = (props) => {
+
   return (
     <div className={s.content} >
       <User />
-      <Posts />
+      <Posts posts={props.posts}/>
     </div>
   )
 }
