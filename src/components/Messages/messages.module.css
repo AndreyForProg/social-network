@@ -1,0 +1,24 @@
+.messages {
+  display: flex;
+
+}
+.friends {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  text-align: end;
+  color: aliceblue;
+}
+.friends a {
+  text-decoration: none;
+  color: white;
+}
+.friends a:hover {
+  color: cadetblue;
+}
+.friends a:focus {
+  color: coral;
+}
+.dialogs {
+  margin: 0 auto;
+}

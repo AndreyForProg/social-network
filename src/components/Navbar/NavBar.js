@@ -1,28 +1,29 @@
 import React from 'react'
 import s from './navbar.module.css'
+import {NavLink} from 'react-router-dom'
 
 
 const NavBar = () => {
   return (
     <div className={s.navbar}>
       <div>
-        first nav
+        <NavLink to='/Content'>Profile</NavLink>
       </div>
 
       <div>
-        second nav
+        <NavLink to='/Messages'>Messages</NavLink>
       </div>
 
       <div>
-        third nav
+        <NavLink to='/News'>News</NavLink>
       </div>
 
       <div>
-        fourth nav
+        <NavLink to='/Music'>Music</NavLink>
       </div>
 
       <div>
-        five nav
+        <NavLink to='/Settings'>Settings</NavLink>
       </div>
     </div>
   );

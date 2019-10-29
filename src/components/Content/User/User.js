@@ -1,7 +1,6 @@
 import React from 'react'
 import s from './user.module.css'
 
-
 const User = () => {
   return (
     <div className={s.user} >
