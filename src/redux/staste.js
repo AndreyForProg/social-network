@@ -1,6 +1,5 @@
 import {renderTree} from '../renderTree'
 
-
 let state = {
   messages: {
     friendsData: [
