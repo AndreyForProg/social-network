@@ -7,7 +7,7 @@ const Content = (props) => {
   return (
     <div className={s.content} >
       <User />
-      <Posts posts={props.posts} addPost={props.addPost}/>
+      <Posts posts={props.posts} addPost={props.addPost} changePostText={props.changePostText}/>
     </div>
   )
 }
