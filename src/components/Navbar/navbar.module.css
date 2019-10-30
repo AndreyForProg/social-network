@@ -2,4 +2,12 @@
   border: darkgrey 1px solid;
   padding-left: 40%;
   background: antiquewhite;
+  position: relative;
+}
+.friends_online{
+  position: absolute;
+  left: 0;
+  text-align: center;
+  padding-top: 20px;
+  background: antiquewhite;
 }

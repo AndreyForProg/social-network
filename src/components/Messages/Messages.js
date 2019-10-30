@@ -7,6 +7,13 @@ const Messages = (props) => {
   let frendsDataElements = props.friends.map( friend => <Friends name={friend.name} id={friend.id}/>)
   let dialogDataElements = props.dialogs.map( dialog => <Dialog message={dialog.message}/> )
 
+  let newMessage = React.createRef();
+  let sendMessage = () => {
+    let text = newMessage.current.value
+    props.sendMessage(text)
+    newMessage.current.value = ''
+  }
+
   return (
     <div className={s.messages}>
       <div className={s.friends}>
@@ -15,6 +22,11 @@ const Messages = (props) => {
 
       <div className={s.dialogs}>
         {dialogDataElements}
+        <div>
+          <textarea cols="40" rows="3" placeholder="write message" ref={newMessage}></textarea>
+          <br/>
+          <button onClick={sendMessage}>send</button>
+        </div>
       </div>
     </div>
   )

@@ -1,8 +1,4 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import {renderTree} from './renderTree'
+import state from './redux/staste'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+renderTree(state)
