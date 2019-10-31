@@ -4,6 +4,7 @@ import Friends from './Friends/Friends'
 import Dialog from './Dialog/Dialog'
 
 const Messages = (props) => {
+  console.log(props);
   let frendsDataElements = props.friends.map( friend => <Friends name={friend.name} id={friend.id}/>)
   let dialogDataElements = props.dialogs.friendsMessages.map( dialog => <Dialog message={dialog.message}/> )
 
