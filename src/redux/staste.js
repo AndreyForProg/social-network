@@ -1,10 +1,5 @@
 import messagePageReducer from './messagePageReducer'
 import contentPostsReducer from './contentPageReducer'
-
-let store = {
-  _state: {
-    messages: {
-      friendsData: [
         {
           id: '1',
           name: 'Sanya'
