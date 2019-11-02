@@ -1,14 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import store from './redux/staste'
+import store from './redux/redux-store'
 
 let callSubscriber = (state) => {
   ReactDOM.render(
-    <App state={state} addPost={store.addPost.bind(store)} sendMessage={store.sendMessage.bind(store)} changePostText={store.changePostText.bind(store)} chengeMessageText={store.chengeMessageText.bind(store)}/>,
+    <App state={state} dispatch={store.dispatch.bind(store)}/>,
     document.getElementById('root')
   )
 }
 
 callSubscriber(store.getState())
-store.subscribe(callSubscriber)
+store.subscribe( () => {
+  let state = store.getState()
+  callSubscriber(state)
+})

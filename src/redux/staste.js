@@ -1,3 +1,6 @@
+import messagePageReducer from './messagePageReducer'
+import contentPostsReducer from './contentPageReducer'
+
 let store = {
   _state: {
     messages: {
@@ -102,44 +105,22 @@ let store = {
       }
     ]
   },
-  getState() {
-    return this._state
-  },
-  addPost() {
-    let newPost = {
-      id: 4,
-      likes: 0,
-      message: this._state.postData.changePostText
-    }
-    this._state.postData.posts.push(newPost)
-    this._callSubscriber(this._state)
-    this._state.postData.changePostText = ''
-  },
-  changePostText(text) {
-    this._state.postData.changePostText = text
-    this._callSubscriber(this._state)
-  },
-  sendMessage() {
-    let newMessage = {
-      id: 4,
-      message: this._state.messages.dialogData.chengeMessageText
-    }
-    this._state.messages.dialogData.friendsMessages.push(newMessage)
-    this._callSubscriber(this._state)
-    this._state.messages.dialogData.chengeMessageText = ''
-  },
-  chengeMessageText(message) {
-    this._state.messages.dialogData.chengeMessageText = message
-    this._callSubscriber(this._state)
-  },
   _callSubscriber() {
     console.log('state shanged')
   },
+
+  getState() {
+    return this._state
+  },
   subscribe(observer) {
     this._callSubscriber = observer
+  },
+
+  dispatch(action) {
+    contentPostsReducer( this._state.postData, action )
+    messagePageReducer( this._state.messages.dialogData, action )
+    this._callSubscriber(this._state)
   }
 }
-
-
 
 export default store
