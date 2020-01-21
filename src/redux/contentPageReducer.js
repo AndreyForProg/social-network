@@ -22,20 +22,24 @@ const initState = {
     changePostText: ''
 }
 
-const contentPostsReducer = ( state=initState, action ) => {
+const contentPostsReducer = ( state = initState, action ) => {
+
   switch ( action.type ) {
-    case ADD_POST:
-      let newPost = {
-        id: 4,
-        likes: 0,
-        message: state.changePostText
+    case ADD_POST: {
+      return {
+        ...state,
+        changePostText: '',
+        posts: [...state.posts, {id: 4, likes: 4, message: state.changePostText}]
       }
-      state.posts.push(newPost)
-      state.changePostText = ''
-      return state
-    case CHANGE_POST_TEXT:
-      state.changePostText = action.text
-      return state
+    }
+
+    case CHANGE_POST_TEXT: {
+      return {
+        ...state,
+        changePostText: action.text
+      }
+    }
+
     default: return state
   }
 }

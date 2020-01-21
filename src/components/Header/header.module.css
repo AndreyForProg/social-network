@@ -5,6 +5,7 @@
   width: 100%;
   height: 50px;
   background-color: cadetblue;
+  z-index: 2;
 }
 .header_wrapper {
   width: 1200px;

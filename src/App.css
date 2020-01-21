@@ -5,7 +5,8 @@ body {
   background-color: rgb(4, 63, 63);
 }
 .wrapper {
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 2fr 10fr;

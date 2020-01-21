@@ -1,5 +1,4 @@
 import React from 'react'
-import ava from '../../../assetc/ava.png'
 import s from './friendsOnline.module.css'
 
 const FriendsOnline = (props) => {

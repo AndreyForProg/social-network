@@ -58,14 +58,21 @@ const messagePageReducer = (state = initState, action) => {
         id: 4,
         message: state.dialogData.chengeMessageText
       }
-      state.dialogData.friendsMessages.push(newMessage)
-      state.dialogData.chengeMessageText = ''
-      return state
+
+      return {
+        ...state,
+        dialogData: {
+          ...state.dialogData,
+          chengeMessageText: '',
+          friendsMessages: [...state.dialogData.friendsMessages, newMessage]
+        }
+      }
     }
     case CHENGE_MESSAGE_TEXT: {
-      console.log(action.message)
-      state.dialogData.chengeMessageText = action.message
-      return state
+      let stateCopy = {...state}
+      stateCopy.dialogData = {...state.dialogData}
+      stateCopy.dialogData.chengeMessageText = action.message
+      return stateCopy
     }
     default: {
       return state
@@ -78,7 +85,6 @@ export const sendMessageCreater = () => ({
 })
 
 export const changeMessageCreater = (text) => {
-  console.log(text)
   return {
     type: CHENGE_MESSAGE_TEXT,
     message: text

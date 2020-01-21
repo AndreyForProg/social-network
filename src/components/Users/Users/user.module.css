@@ -1,0 +1,28 @@
+.users {
+  padding-left: 2%;
+  text-align: center;
+}
+
+.user {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+}
+.content {
+  width: 70%;
+  border: 2px solid white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
+}
+.avatar img {
+  width: 60px;
+  margin-bottom: 3%;
+}

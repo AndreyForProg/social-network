@@ -2,16 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import store from './redux/redux-store'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
-let callSubscriber = (state) => {
   ReactDOM.render(
-    <App state={state} dispatch={store.dispatch.bind(store)}/>,
+    <BrowserRouter>
+      <Provider store = {store}>
+        <App />
+      </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
   )
-}
-
-callSubscriber(store.getState())
-store.subscribe( () => {
-  let state = store.getState()
-  callSubscriber(state)
-})

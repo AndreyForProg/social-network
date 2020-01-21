@@ -1,27 +1,28 @@
 import React from 'react'
 import Post from './Post/Post'
 import Posts from './Posts'
+import { connect } from 'react-redux'
 import {addPostCreater, writePostCreater} from '../../../redux/contentPageReducer'
 
-const PostsContainer = (props) => {
-  let postDataElements = props.posts.posts.map( post => <Post message={post.message} likes={post.likes}/> )
-
-  let addPost = () => {
-    props.dispatch(addPostCreater())
+let mapStateToProps = (state) => {
+  return {
+    postDataElements: state.content.posts.map( post => <Post message={post.message} likes={post.likes}/> ),
+    changePostText: state.content.changePostText,
   }
-
-  let uppdatePostText = () => {
-    let text = newPostElement.current.value
-    props.dispatch(writePostCreater(text))
-  }
-
-  let changePostText = props.posts.changePostText
-  let postDataElement = props.postDataElement
-  let newPostElement = React.createRef()
-
-  return (
-    <Posts addPost={addPost} postDataElement={postDataElement} uppdatePostText={uppdatePostText} changePostText={changePostText} postDataElements={postDataElements} newPostElement={newPostElement}/>
-  )
 }
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: () => {
+      dispatch(addPostCreater())
+    },
+    uppdatePostText: (e) => {
+      let text = e.target.value
+      dispatch(writePostCreater(text))
+    }
+  }
+}
+
+const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
 
 export default PostsContainer

@@ -2,28 +2,29 @@ import React from 'react'
 import Friends from './Friends/Friends'
 import Dialog from './Dialog/Dialog'
 import Messages from './Messages'
+import { connect } from 'react-redux'
 import { sendMessageCreater, changeMessageCreater } from '../../redux/messagePageReducer'
 
-const MessagesContainer = (props) => {
-  let frendsDataElements = props.friends.map( friend => <Friends name={friend.name} id={friend.id}/>)
-  let dialogDataElements = props.dialogs.friendsMessages.map( dialog => <Dialog message={dialog.message}/>)
-
-  let newMessage = React.createRef()
-
-  let sendMessage = () => {
-    props.dispatch(sendMessageCreater())
+let mapStateToProps = (state) => {
+  return {
+    frendsDataElements: state.messages.friendsData.map( friend => <Friends name={friend.name} id={friend.id}/>),
+    dialogDataElements: state.messages.dialogData.friendsMessages.map( dialog => <Dialog message={dialog.message}/>),
+    chengeMessageTextValue: state.messages.dialogData.chengeMessageText
   }
-
-  let chengeMessageText = () => {
-    let text = newMessage.current.value
-    props.dispatch(changeMessageCreater(text))
-  }
-
-  let chengeMessageTextValue = props.dialogs.chengeMessageText
-
-  return (
-    <Messages frendsDataElements={frendsDataElements} dialogDataElements={dialogDataElements} chengeMessageText={chengeMessageText} chengeMessageTextValue={chengeMessageTextValue} sendMessage={sendMessage} newMessage={newMessage}/>
-  )
 }
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: () => {
+      dispatch(sendMessageCreater())
+    },
+    chengeMessageText: (e) => {
+      let text = e.target.value
+      dispatch(changeMessageCreater(text))
+    }
+  }
+}
+
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
 
 export default MessagesContainer

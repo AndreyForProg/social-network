@@ -6,7 +6,7 @@ const Posts = (props) => {
       <div>
         <h3>My posts</h3>
         <div className={s.myPost}>
-          <textarea ref={props.newPostElement} className={s.writePost} placeholder="your news..." value={props.changePostText} onChange={props.uppdatePostText}/>
+          <textarea className={s.writePost} placeholder="your news..." value={props.changePostText} onChange={props.uppdatePostText}/>
           <button className={s.sendPost} onClick={props.addPost}>Send</button>
         </div>
         {props.postDataElements}
