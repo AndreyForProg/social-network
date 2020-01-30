@@ -1,20 +1,25 @@
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
 const SET_USERS = 'SET_USERS'
+const ACTIVE_PAGE = 'ACTIVE_PAGE'
+const IS_DOWNLOADING = 'IS_DOWNLOADING'
 
 const initState = {
-  users: [
-
-  ]
+  users: [],
+  countUsersOnPage: 20,
+  activeP: 1,
+  maxUsers: 1,
+  isDownload: false
 }
 
 const usersPageReducer = (state = initState, action) => {
   switch (action.type) {
     case SET_USERS:
-    return {
-      ...state,
-      users: [...state.users, ...action.users]
-    }
+      let stateCopy = {...state}
+      stateCopy.users = [...action.users]
+      stateCopy.users.photos = {...action.users.photos}
+      stateCopy.maxUsers = action.totalCount
+      return stateCopy
 
     case FOLLOW_USER:
     return {
@@ -38,25 +43,48 @@ const usersPageReducer = (state = initState, action) => {
         })
     }
 
+    case ACTIVE_PAGE:
+      return {
+        ...state,
+        activeP: action.activePage
+    }
+
+    case IS_DOWNLOADING:
+      return {
+        ...state,
+        isDownload: action.download
+    }
+
     default: {
       return state
     }
   }
 }
 
-export const followActionCreater = (userId) => ({
+export const follow = (userId) => ({
   type: FOLLOW_USER,
   id: userId
 })
 
-export const unFollowActionCreater = (userId) => ({
+export const unFollow = (userId) => ({
   id: userId,
   type: UNFOLLOW_USER
 })
 
-export const setUsersAC = (users) => ({
+export const activePageClick = (page) => ({
+  type: ACTIVE_PAGE,
+  activePage: page
+})
+
+export const isDownload = (download) => ({
+  type: IS_DOWNLOADING,
+  download
+})
+
+export const setUsers = (users, totalCount) => ({
   type: SET_USERS,
-  users: users
+  users: users,
+  totalCount
 })
 
 export default usersPageReducer

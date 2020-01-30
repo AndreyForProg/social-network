@@ -1,26 +1,17 @@
-import React from 'react'
+import UsersResponseContainer from './UsersResponseContainer'
 import { connect } from 'react-redux'
-import Users from './Users/Users'
-import {followActionCreater, unFollowActionCreater, setUsersAC} from '../../redux/usersPageReducer'
+import {follow, unFollow, setUsers, activePageClick, isDownload} from '../../redux/usersPageReducer'
 
 let mapStateToProps = (state) => {
+  let pagination = state.usersPageReducer.maxUsers / state.usersPageReducer.countUsersOnPage
   return ({
-    users: state.usersPageReducer.users
+    users: state.usersPageReducer.users,
+    countUsersOnPage: state.usersPageReducer.countUsersOnPage,
+    maxUsers: state.usersPageReducer.maxUsers,
+    activeP: state.usersPageReducer.activeP,
+    pagination,
+    isDownloading: state.usersPageReducer.isDownload
   })
 }
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (id) => {
-      return dispatch(followActionCreater(id))
-    },
-    unfollow: (id) => {
-      return dispatch(unFollowActionCreater(id))
-    },
-    setUsers: (users) => {
-      dispatch(setUsersAC(users))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, {follow, unFollow, setUsers, activePageClick, isDownload})(UsersResponseContainer)

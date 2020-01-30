@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import Header from './components/Header/Header'
+import HeaderContainer from './components/Header/HeaderContainer'
 import NavBar from './components/Navbar/NavBar'
 import ContentContainer from './components/Content/ContentContainer'
 import Music from './components/Music/Music'
@@ -14,11 +14,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <div>
-        <Header />
+        <HeaderContainer />
         <div className='wrapper'>
           <NavBar />
           <div className="app-content">
-            <Route path="/Content" render={() => <ContentContainer />}/>
+            <Route path="/Content/:userId?" render={() => <ContentContainer />}/>
 
             <Route path="/Messages" render={() => <MessagesContainer />}/>
 

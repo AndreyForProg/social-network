@@ -1,16 +1,33 @@
 import React from 'react'
-import s from './content.module.css'
-import User from './User/User'
-import PostsContainer from './Posts/PostsContainer'
+import * as axios from 'axios'
+import Content from './Content'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import {setContent} from '../../redux/contentPageReducer'
 
-const ContentContainer = () => {
+class ContentContainer extends React.Component {
 
-  return (
-    <div className={s.content} >
-      <User />
-      <PostsContainer />
-    </div>
-  )
+  componentDidMount() {
+    let id = this.props.match.params.userId
+    if (!id) {
+      id = 2
+    }
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
+    .then(response => {
+      this.props.setContent(response.data)
+    })
+  }
+
+  render() {
+    return (
+        <Content {...this.props} content={this.props.content} />
+      )
+  }
 }
 
-export default ContentContainer
+let mapStateToProps = (state) => ({
+  content: state.content.content
+})
+
+let WithUrlDataContainerComponent = withRouter(ContentContainer)
+export default connect(mapStateToProps, {setContent})(WithUrlDataContainerComponent)

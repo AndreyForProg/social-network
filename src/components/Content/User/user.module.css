@@ -13,3 +13,8 @@
   height: 100px;
   margin: 0 1% 1% 0;
 }
+.contacts {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD_POST'
 const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+const SET_CONTENT = 'SET_CONTENT'
 
 const initState = {
     posts: [
@@ -19,7 +20,8 @@ const initState = {
         message: 'super'
       }
     ],
-    changePostText: ''
+    changePostText: '',
+    content: null
 }
 
 const contentPostsReducer = ( state = initState, action ) => {
@@ -40,12 +42,23 @@ const contentPostsReducer = ( state = initState, action ) => {
       }
     }
 
+    case SET_CONTENT: {
+      return {
+        ...state, content: action.content
+      }
+    }
+
     default: return state
   }
 }
 
 export const addPostCreater = () => ({
   type: ADD_POST
+})
+
+export const setContent = (content) => ({
+  type: SET_CONTENT,
+  content
 })
 
 export const writePostCreater = (text) => ({
