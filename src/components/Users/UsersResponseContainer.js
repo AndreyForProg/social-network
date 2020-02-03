@@ -1,24 +1,24 @@
 import React from 'react'
 import Users from './Users/Users'
+import {API} from '../../api/api'
 import DownloadImg from '../details/downloadImg/DownloadImg'
-import * as axios from 'axios'
 
 class UsersResponseContainer extends React.Component {
 
   componentDidMount() {
     this.props.isDownload(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.countUsersOnPage}&&page=${this.props.activeP}`)
-    .then(response => {
-      this.props.setUsers(response.data.items, response.data.totalCount)
+    API.getUsersPage(this.props.countUsersOnPage, this.props.activeP)
+    .then(data => {
+      this.props.setUsers(data.items, data.totalCount)
       this.props.isDownload(false)
-  })
+    })
   }
-
+-
   activPaginationPage = (n) => {
     this.props.isDownload(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${n}&&count=${this.props.countUsersOnPage}`)
-    .then(response => {
-      this.props.setUsers(response.data.items, response.data.totalCount)
+    API.activePagination(n, this.props.countUsersOnPage)
+    .then(data => {
+      this.props.setUsers(data.items, data.totalCount)
       this.props.isDownload(false)
     })
   }
@@ -38,8 +38,10 @@ class UsersResponseContainer extends React.Component {
             activePageClick = {this.props.activePageClick}
             activPaginationPage={this.activPaginationPage}
             follow={this.props.follow}
-            unfollow={this.props.unfollow}
+            unfollow={this.props.unFollow}
             users={this.props.users}
+            isFollowing={this.props.isFollowing}
+            isFollow={this.props.isFollow}
             activeP={this.props.activeP}/>
     </>
   }

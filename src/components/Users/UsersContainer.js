@@ -1,6 +1,6 @@
 import UsersResponseContainer from './UsersResponseContainer'
 import { connect } from 'react-redux'
-import {follow, unFollow, setUsers, activePageClick, isDownload} from '../../redux/usersPageReducer'
+import {follow, unFollow, setUsers, activePageClick, isDownload, isFollowing} from '../../redux/usersPageReducer'
 
 let mapStateToProps = (state) => {
   let pagination = state.usersPageReducer.maxUsers / state.usersPageReducer.countUsersOnPage
@@ -10,8 +10,9 @@ let mapStateToProps = (state) => {
     maxUsers: state.usersPageReducer.maxUsers,
     activeP: state.usersPageReducer.activeP,
     pagination,
-    isDownloading: state.usersPageReducer.isDownload
+    isDownloading: state.usersPageReducer.isDownload,
+    isFollow: state.usersPageReducer.isFollowing
   })
 }
 
-export default connect(mapStateToProps, {follow, unFollow, setUsers, activePageClick, isDownload})(UsersResponseContainer)
+export default connect(mapStateToProps, {follow, unFollow, setUsers, activePageClick, isDownload, isFollowing})(UsersResponseContainer)

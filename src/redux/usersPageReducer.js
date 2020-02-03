@@ -3,13 +3,15 @@ const UNFOLLOW_USER = 'UNFOLLOW_USER'
 const SET_USERS = 'SET_USERS'
 const ACTIVE_PAGE = 'ACTIVE_PAGE'
 const IS_DOWNLOADING = 'IS_DOWNLOADING'
+const IS_FOLLOWING = 'IS_FOLLOWING'
 
 const initState = {
   users: [],
   countUsersOnPage: 20,
   activeP: 1,
   maxUsers: 1,
-  isDownload: false
+  isDownload: false,
+  isFollowing: []
 }
 
 const usersPageReducer = (state = initState, action) => {
@@ -55,6 +57,12 @@ const usersPageReducer = (state = initState, action) => {
         isDownload: action.download
     }
 
+    case IS_FOLLOWING:
+      return {
+        ...state,
+        isFollowing: action.bool ? [...state.isFollowing, action.id] : state.isFollowing.filter(id => id !== action.id)
+    }
+
     default: {
       return state
     }
@@ -79,6 +87,12 @@ export const activePageClick = (page) => ({
 export const isDownload = (download) => ({
   type: IS_DOWNLOADING,
   download
+})
+
+export const isFollowing = (bool, id) => ({
+  type: IS_FOLLOWING,
+  bool,
+  id
 })
 
 export const setUsers = (users, totalCount) => ({

@@ -35,7 +35,7 @@ const NavBar = (props) => {
         <FriendsOnlineContainer friendsOnline={props.friendsOnline}/>
       </div>
     </div>
-  );
+  )
 }
 
 export default NavBar
