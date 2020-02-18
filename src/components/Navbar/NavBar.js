@@ -19,7 +19,7 @@ const NavBar = (props) => {
       </div>
 
       <div>
-        <NavLink to='/News'>News</NavLink>
+        <NavLink to='/Login'>Login</NavLink>
       </div>
 
       <div>

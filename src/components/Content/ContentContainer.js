@@ -1,33 +1,35 @@
 import React from 'react'
-import * as axios from 'axios'
 import Content from './Content'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {setContent} from '../../redux/contentPageReducer'
+import {contentPage, getStatus, updateStatusThunk} from '../../redux/contentPageReducer'
+// import {WithAuthRedirect} from '../../hoc/WithAuthRedirect'
+import { compose } from 'redux'
 
 class ContentContainer extends React.Component {
-
   componentDidMount() {
     let id = this.props.match.params.userId
     if (!id) {
-      id = 2
+      id = 5733
     }
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-    .then(response => {
-      this.props.setContent(response.data)
-    })
+    this.props.contentPage(id)
+    this.props.getStatus(id)
   }
 
   render() {
     return (
-        <Content {...this.props} content={this.props.content} />
+        <Content content={this.props.content} status={this.props.status} updateStatus={this.props.updateStatusThunk}/>
       )
   }
 }
 
 let mapStateToProps = (state) => ({
-  content: state.content.content
+  content: state.content.content,
+  status: state.content.status
 })
 
-let WithUrlDataContainerComponent = withRouter(ContentContainer)
-export default connect(mapStateToProps, {setContent})(WithUrlDataContainerComponent)
+export default compose(
+  connect(mapStateToProps, {contentPage, getStatus, updateStatusThunk}),
+  withRouter
+  // WithAuthRedirect
+)(ContentContainer)

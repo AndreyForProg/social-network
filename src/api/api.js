@@ -28,10 +28,23 @@ export const API = {
   },
 
   authMe() {
-    return instance.get(`$auth/me`)
+    return instance.get(`/auth/me`)
   },
 
-  contentPage () {
-    return instance.get(`profile/2`)
+  contentPage (id) {
+    console.warn('use contentAPI')
+    return instance.get('/profile/' + id)
+  }
+}
+
+export const contentAPI = {
+  getContentPage (id) {
+    return instance.get('/profile/' + id)
+  },
+  getStatus (id) {
+    return instance.get('/profile/status/' + id)
+  },
+  updateStatus (status) {
+    return instance.put('/profile/status', {status})
   }
 }

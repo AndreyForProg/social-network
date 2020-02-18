@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './user.module.css'
+import UserStatus from './UserStatus'
 import DownloadImg from '../../details/downloadImg/DownloadImg'
 
 const User = (props) => {
@@ -22,6 +23,7 @@ const User = (props) => {
           <span>{props.content.contacts.mainLink}</span>
         </div>
         <img src={props.content.photos.small} alt=""/>
+          <UserStatus status={props.status} updateStatus={props.updateStatus}/>
           <h3>{props.content.fullName}</h3>
           <p>{props.content.aboutMe}</p>
         </div>

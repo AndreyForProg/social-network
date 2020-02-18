@@ -9,6 +9,7 @@ import Settings from './components/Settings/Settings'
 import {Route, BrowserRouter} from 'react-router-dom'
 import MessagesContainer from './components/Messages/MessagesContainer'
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/Messages" render={() => <MessagesContainer />}/>
 
             <Route path="/Users" render = {() => <UsersContainer />}/>
+            <Route path="/Login" render = {() => <Login />}/>
 
             <Route path="/Music" component={Music}/>
             <Route path="/News" component={News}/>

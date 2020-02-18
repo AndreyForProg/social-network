@@ -1,22 +1,13 @@
 import React from 'react'
 import Header from './Header'
 import {connect} from 'react-redux'
-import {setAuthUser} from '../../redux/authR'
+import {getAuthUserThunk} from '../../redux/authR'
 import {API} from '../../api/api'
 
 class HeaderContainer extends React.Component {
 
   componentDidMount() {
-    API.authMe()
-    .then(response => {
-      if (response.data.resultCode === 0) {
-        let {id, email, login} = response.data.data
-        API.contentPage()
-        .then(photo => {
-          this.props.setAuthUser(id, email, login, photo.data.photos.small)
-        })
-      }
-    })
+    this.props.getAuthUserThunk()
   }
 
   render () {
@@ -33,4 +24,4 @@ let mapStateToProps = (state) => ({
   avatar: state.authR.photo
 })
 
-export default connect(mapStateToProps, {setAuthUser})(HeaderContainer)
+export default connect(mapStateToProps, {getAuthUserThunk})(HeaderContainer)

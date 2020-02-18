@@ -1,3 +1,5 @@
+import {API} from '../api/api'
+
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
 const SET_USERS = 'SET_USERS'
@@ -100,5 +102,53 @@ export const setUsers = (users, totalCount) => ({
   users: users,
   totalCount
 })
+
+export const getUsersThunkCreater = (countUsersOnPage, activeP) => {
+  return (dispatch) => {
+    dispatch(isDownload(true))
+    API.getUsersPage(countUsersOnPage, activeP)
+      .then(data => {
+        dispatch(setUsers(data.items, data.totalCount))
+        dispatch(isDownload(false))
+      })
+    }
+}
+
+export const activPaginationPageThunkCreater = (countUsersOnPage, activeP) => {
+  return (dispatch) => {
+    dispatch(isDownload(true))
+    API.activePagination(countUsersOnPage, activeP)
+      .then(data => {
+        dispatch(setUsers(data.items, data.totalCount))
+        dispatch(isDownload(false))
+      })
+  }
+}
+
+export const followUserThunkCreater = (id) => {
+  return (dispatch) => {
+    dispatch(isFollowing(true, id))
+    API.followUser(id)
+    .then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(unFollow(id))
+        dispatch(isFollowing(false, id))
+      }
+    })
+  }
+}
+
+export const unfollowUserThunkCreater = (id) => {
+  return (dispatch) => {
+    dispatch(isFollowing(true, id))
+    API.unfollowUser(id)
+    .then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(follow(id))
+        dispatch(isFollowing(false, id))
+      }
+    })
+    }
+}
 
 export default usersPageReducer

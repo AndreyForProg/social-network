@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './messages.module.css'
+import { Redirect } from 'react-router-dom'
 
 const Messages = (props) => {
   return (

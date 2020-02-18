@@ -1,31 +1,20 @@
 import React from 'react'
 import Users from './Users/Users'
-import {API} from '../../api/api'
 import DownloadImg from '../details/downloadImg/DownloadImg'
 
 class UsersResponseContainer extends React.Component {
 
   componentDidMount() {
-    this.props.isDownload(true)
-    API.getUsersPage(this.props.countUsersOnPage, this.props.activeP)
-    .then(data => {
-      this.props.setUsers(data.items, data.totalCount)
-      this.props.isDownload(false)
-    })
+    this.props.getUsersThunkCreater(this.props.countUsersOnPage, this.props.activeP)
   }
--
+
   activPaginationPage = (n) => {
-    this.props.isDownload(true)
-    API.activePagination(n, this.props.countUsersOnPage)
-    .then(data => {
-      this.props.setUsers(data.items, data.totalCount)
-      this.props.isDownload(false)
-    })
+    this.props.activPaginationPageThunkCreater(n, this.props.countUsersOnPage)
   }
 
   paginationArr() {
     let arrPag = []
-    for(let i = 0; i <= Math.ceil(this.props.pagination); i++) {
+    for(let i = 0; i < Math.ceil(this.props.pagination); i++) {
       arrPag[i] = i + 1
     }
     return arrPag
@@ -42,6 +31,8 @@ class UsersResponseContainer extends React.Component {
             users={this.props.users}
             isFollowing={this.props.isFollowing}
             isFollow={this.props.isFollow}
+            followUser={this.props.followUserThunkCreater}
+            unfollowUser={this.props.unfollowUserThunkCreater}
             activeP={this.props.activeP}/>
     </>
   }
